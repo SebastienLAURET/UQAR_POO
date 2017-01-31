@@ -19,6 +19,7 @@ public:
   const Date        &getDateNaissance();
   double            getSalaire();
   int               getHeureParSemaine();
+  void              display();
 private:
   std::string _prenom;
   std::string _nom;

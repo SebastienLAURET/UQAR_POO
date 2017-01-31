@@ -15,30 +15,30 @@ void Personne::init() {
   std::string tmpPays;
 
   std::cout << "Nom : ";
-  std::cin >> _nom;
+  std::getline (std::cin, _nom);
   std::cout << "prenom : ";
-  std::cin >> _prenom;
+  std::getline (std::cin, _prenom);
 
   std::cout << "Date : ";
-  std::cin >> tmpDate;
+  std::getline (std::cin, tmpDate);
   _dateNaissance = Date(tmpDate);
 
 
   std::cout << "Numero civique : ";
-  std::cin >> tmpNCivique;
+  std::getline (std::cin, tmpNCivique);
   std::cout << "Rue : ";
-  std::cin >> tmpRue;
+  std::getline (std::cin, tmpRue);
   std::cout << "Ville : ";
-  std::cin >> tmpVille;
+  std::getline (std::cin, tmpVille);
   std::cout << "Pays : ";
-  std::cin >> tmpPays;
+  std::getline (std::cin, tmpPays);
   _adresse = Adresse(tmpNCivique, tmpRue, tmpVille, tmpPays);
 
   std::cout << "Salaire : ";
   std::cin >> _salaire;
 
   std::cout << "Heure par semaine : ";
-  std::cin >> _salaire;
+  std::cin >> _heureParSemaine;
 
 }
 
@@ -64,4 +64,19 @@ double            Personne::getSalaire() {
 
 int               Personne::getHeureParSemaine() {
   return _heureParSemaine;
+}
+
+void              Personne::display() {
+  std::cout << "------------------------------" << std::endl;
+  std::cout << "Prenom : " <<  _prenom << std::endl;
+  std::cout << "Nom : " << _nom << std::endl;
+  std::cout << "Date de naissance : " << _dateNaissance.toString() << std::endl;
+  std::cout << "Numero civique : " << _adresse.getNCivique() << std::endl;
+  std::cout << "Rue : " << _adresse.getRue() << std::endl;
+  std::cout << "Ville : " << _adresse.getVille() << std::endl;
+  std::cout << "Pays : " << _adresse.getPays() << std::endl;
+  std::cout << "Salaire : " << _salaire << std::endl;
+  std::cout << "Heure/semaine : " << _heureParSemaine << std::endl;
+  std::cout << "------------------------------" << std::endl;
+
 }
