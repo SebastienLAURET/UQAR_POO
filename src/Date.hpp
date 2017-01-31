@@ -6,6 +6,7 @@
 
 class Date {
 public:
+  Date();
   Date(std::string &date);
   Date(int,int,int);
   ~Date();

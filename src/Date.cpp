@@ -1,5 +1,9 @@
 #include "Date.hpp"
 
+Date::Date() {
+
+}
+
 Date::Date(std::string &date) {
   std::string str;
   std::size_t begin = 0, end = 0;

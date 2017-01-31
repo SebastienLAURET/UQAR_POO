@@ -1,5 +1,9 @@
 #include "Adresse.hpp"
 
+Adresse::Adresse() {
+
+}
+
 Adresse::Adresse(std::string &nCivique, std::string &rue,
    std::string &ville, std::string &pays)
    : _nCivique(nCivique), _rue(rue), _ville(ville), _pays(pays) {

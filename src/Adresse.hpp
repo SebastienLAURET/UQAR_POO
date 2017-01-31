@@ -3,8 +3,10 @@
 
 #include <string>
 
+
 class Adresse {
 public:
+  Adresse();
   Adresse(std::string &,std::string &,std::string &,std::string &);
   ~Adresse();
 
