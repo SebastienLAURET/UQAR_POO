@@ -12,6 +12,7 @@ typedef struct  s_date {
 class Date {
 public:
   Date();
+  Date(t_date&);
   Date(std::string &date);
   Date(int,int,int);
   ~Date();

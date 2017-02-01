@@ -4,6 +4,13 @@ Personne::Personne() {
 
 }
 
+Personne::Personne(t_personne &pers)
+: _prenom(pers.prenom), _nom(pers.nom), _adresse(pers.addr),
+ _dateNaissance(pers.date), _salaire(pers.salaire),
+ _heureParSemaine(pers.heureSemaine) {
+
+}
+
 Personne::~Personne() {
 
 }

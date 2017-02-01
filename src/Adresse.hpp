@@ -14,6 +14,7 @@ typedef struct  s_adresse {
 class Adresse {
 public:
   Adresse();
+  Adresse(t_adresse&);
   Adresse(std::string &,std::string &,std::string &,std::string &);
   ~Adresse();
 

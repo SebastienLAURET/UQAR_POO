@@ -4,6 +4,11 @@ Date::Date() {
 
 }
 
+Date::Date(t_date &date)
+: _day(date.day), _month(date.month), _year(date.year) {
+
+}
+
 Date::Date(std::string &date) {
   std::string str;
   std::size_t begin = 0, end = 0;

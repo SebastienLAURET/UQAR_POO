@@ -4,6 +4,11 @@ Adresse::Adresse() {
 
 }
 
+Adresse::Adresse(t_adresse &addr)
+: _nCivique(addr.nCivique), _rue(addr.rue), _ville(addr.ville), _pays(addr.pays) {
+
+}
+
 Adresse::Adresse(std::string &nCivique, std::string &rue,
    std::string &ville, std::string &pays)
    : _nCivique(nCivique), _rue(rue), _ville(ville), _pays(pays) {

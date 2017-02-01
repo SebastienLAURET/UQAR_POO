@@ -22,6 +22,7 @@ typedef struct s_personne {
 class Personne {
 public:
   Personne();
+  Personne(t_personne&);
   ~Personne();
 
   void              init();

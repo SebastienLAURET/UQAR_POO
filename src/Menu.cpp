@@ -44,13 +44,25 @@ void Menu::_displayMenu() {
 }
 
 void Menu::_loadFile() {
-/*  ifstream  fs;
+  std::ifstream     fs;
+
   fs.open("./save/save.sv");
+  fs.seekg (0, fs.end);
+  int length = fs.tellg();
+  fs.seekg (0, fs.beg);
+
+  char *tmpStr = new char[length];
+  t_personne        *persTmp;
+
   if (fs.is_open()) {
-    for (auto pers : _persList) {
+    fs.read(tmpStr, length);
+    for (int i = 0; i < length; i+=sizeof(t_personne)) {
+      persTmp = ((t_personne*)&tmpStr[i]);
+      _persList.push_front(Personne(*persTmp));
     }
   }
-  fs.close();*/
+  delete tmpStr;
+  fs.close();
 }
 
 void Menu::_addPersonne() {
@@ -66,15 +78,18 @@ void Menu::_printPersonne() {
 }
 
 void Menu::_savePersonne() {
-  std::ofstream  fs;
+  std::ofstream   fs;
+  t_personne      tmpPers;
+  std::string     tmpStr;
+
   fs.open("./save/save.sv");
   if (fs.is_open()) {
     for (auto pers : _persList) {
-      char *tmp = new char[sizeof(t_personne)];
-      pers.toStruct(*((struct s_personne*)tmp));
-      fs.write(tmp, sizeof(t_personne));
-      delete tmp;
+      pers.toStruct(tmpPers);
+      tmpStr += std::string(((char*)&tmpPers), sizeof(t_personne));
     }
+    std::cout << tmpStr.size() << '\n';
+    fs << tmpStr;
   }
   fs.close();
 }
