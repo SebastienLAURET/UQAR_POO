@@ -31,6 +31,12 @@ Date::~Date() {
 
 }
 
+void Date::toStruct(t_date &date) {
+  date.day = _day;
+  date.month = _month;
+  date.year = _year;
+}
+
 std::string Date::toString() {
   std::stringstream  tmp;
 

@@ -16,6 +16,7 @@ public:
   Date(int,int,int);
   ~Date();
 
+  void        toStruct(t_date &);
   std::string toString();
 
   int         getDay();

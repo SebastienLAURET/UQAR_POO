@@ -25,7 +25,7 @@ public:
   ~Personne();
 
   void              init();
-
+  void              toStruct(t_personne&);
   const std::string &getPrenom();
   const std::string &getNom();
   const Adresse     &getAdresse();

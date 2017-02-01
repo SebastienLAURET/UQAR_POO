@@ -17,7 +17,7 @@ public:
   Adresse(std::string &,std::string &,std::string &,std::string &);
   ~Adresse();
 
-  void operator>>(t_adresse &addr);
+  void        toStruct(t_adresse &addr);
   std::string toString();
   const std::string &getNCivique();
   const std::string &getRue();

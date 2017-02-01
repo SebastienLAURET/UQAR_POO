@@ -14,9 +14,18 @@ Adresse::~Adresse() {
 
 }
 
-void Adresse::operator>>(t_adresse &addr) {
+void Adresse::toStruct(t_adresse &addr) {
+  size_t  size;
+
   std::memset(&addr, 0, sizeof(t_adresse));
-  
+  size = _nCivique.size();
+  std::memcpy(&(addr.nCivique), _nCivique.c_str(), size);
+  size = _rue.size();
+  std::memcpy(&(addr.rue), _rue.c_str(), size);
+  size = _ville.size();
+  std::memcpy(&(addr.ville), _ville.c_str(), size);
+  size = _pays.size();
+  std::memcpy(&(addr.pays), _pays.c_str(), size);
 }
 
 

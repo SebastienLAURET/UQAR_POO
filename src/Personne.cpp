@@ -46,6 +46,20 @@ void Personne::init() {
   _heureParSemaine = std::stoi(tmp);
 }
 
+void Personne::toStruct(t_personne &pers) {
+  size_t  size;
+
+  std::memset(&pers, 0, sizeof(t_personne));
+  size = (_prenom.size() <= 10) ? _prenom.size() : 10;
+  std::memcpy(&pers.prenom, _prenom.c_str(), size);
+  size = (_nom.size() <= 10) ? _nom.size() : 10;
+  std::memcpy(&pers.nom, _nom.c_str(), size);
+  pers.salaire = _salaire;
+  pers.heureSemaine = _heureParSemaine;
+  _dateNaissance.toStruct(pers.date);
+  _adresse.toStruct(pers.addr);
+}
+
 const std::string &Personne::getPrenom() {
  return _prenom;
 }
