@@ -2,7 +2,7 @@
 # define MENU_HPP
 
 #include <list>
-
+#include <fstream>
 #include <curses.h>
 #include <term.h>
 

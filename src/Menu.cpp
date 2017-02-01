@@ -44,7 +44,13 @@ void Menu::_displayMenu() {
 }
 
 void Menu::_loadFile() {
-
+/*  ifstream  fs;
+  fs.open("./save/save.sv");
+  if (fs.is_open()) {
+    for (auto pers : _persList) {
+    }
+  }
+  fs.close();*/
 }
 
 void Menu::_addPersonne() {
@@ -60,5 +66,15 @@ void Menu::_printPersonne() {
 }
 
 void Menu::_savePersonne() {
-
+  std::ofstream  fs;
+  fs.open("./save/save.sv");
+  if (fs.is_open()) {
+    for (auto pers : _persList) {
+      char *tmp = new char[sizeof(t_personne)];
+      pers.toStruct(*((struct s_personne*)tmp));
+      fs.write(tmp, sizeof(t_personne));
+      delete tmp;
+    }
+  }
+  fs.close();
 }
