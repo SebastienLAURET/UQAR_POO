@@ -7,8 +7,11 @@ Personne::Personne() {
 Personne::~Personne() {
 
 }
+
 void Personne::init() {
-  std::string tmpDate;
+  putp(tgetstr("cl", NULL));
+
+  std::string tmp;
   std::string tmpNCivique;
   std::string tmpRue;
   std::string tmpVille;
@@ -20,8 +23,8 @@ void Personne::init() {
   std::getline (std::cin, _prenom);
 
   std::cout << "Date : ";
-  std::getline (std::cin, tmpDate);
-  _dateNaissance = Date(tmpDate);
+  std::getline (std::cin, tmp);
+  _dateNaissance = Date(tmp);
 
 
   std::cout << "Numero civique : ";
@@ -35,11 +38,12 @@ void Personne::init() {
   _adresse = Adresse(tmpNCivique, tmpRue, tmpVille, tmpPays);
 
   std::cout << "Salaire : ";
-  std::cin >> _salaire;
+  std::getline (std::cin, tmp);
+  _salaire = std::stoi(tmp);
 
   std::cout << "Heure par semaine : ";
-  std::cin >> _heureParSemaine;
-
+  std::getline (std::cin, tmp);
+  _heureParSemaine = std::stoi(tmp);
 }
 
 const std::string &Personne::getPrenom() {
@@ -67,6 +71,7 @@ int               Personne::getHeureParSemaine() {
 }
 
 void              Personne::display() {
+
   std::cout << "------------------------------" << std::endl;
   std::cout << "Prenom : " <<  _prenom << std::endl;
   std::cout << "Nom : " << _nom << std::endl;

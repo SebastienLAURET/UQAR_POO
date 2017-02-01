@@ -1,13 +1,14 @@
 NAME	= bin
 
 FILE	= src/Adresse.cpp \
+	src/Personne.cpp \
+	src/Menu.cpp \
 	src/Date.cpp \
-	src/main.cpp \
-	src/Personne.cpp
+	src/main.cpp
 
 OBJ	= $(FILE:.cpp=.o)
 
-CPPFLAGS	+= -std=c++11 -W -Wall -Wextra
+CPPFLAGS	+= -std=c++11 -W -Wall -Wextra -lncurses
 
 GCC	= g++
 

@@ -14,6 +14,12 @@ Adresse::~Adresse() {
 
 }
 
+void Adresse::operator>>(t_adresse &addr) {
+  std::memset(&addr, 0, sizeof(t_adresse));
+  
+}
+
+
 std::string Adresse::toString() {
   std::string tmp;
   tmp <= _nCivique + " " + _rue + ", " + _ville + ", " +_pays;

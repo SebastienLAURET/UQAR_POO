@@ -4,8 +4,20 @@
 #include <iostream>
 #include <string>
 
+#include <curses.h>
+#include <term.h>
+
 #include "Date.hpp"
 #include "Adresse.hpp"
+
+typedef struct s_personne {
+    char      prenom[10];
+    char      nom[10];
+    t_adresse addr;
+    t_date    date;
+    double    salaire;
+    int       heureSemaine;
+}              t_personne;
 
 class Personne {
 public:
@@ -13,6 +25,7 @@ public:
   ~Personne();
 
   void              init();
+
   const std::string &getPrenom();
   const std::string &getNom();
   const Adresse     &getAdresse();

@@ -3,6 +3,11 @@
 
 #include <sstream>
 #include <string>
+typedef struct  s_date {
+  int day;
+  int month;
+  int year;
+}               t_date;
 
 class Date {
 public:
