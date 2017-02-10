@@ -9,14 +9,14 @@ typedef struct  s_date {
   int year;
 }               t_date;
 
-class Date {
-public:
+struct Date {
   Date();
   Date(t_date&);
   Date(std::string &date);
   Date(int,int,int);
   ~Date();
 
+  bool        operator==(Date&);
   void        toStruct(t_date &);
   std::string toString();
 
@@ -24,7 +24,6 @@ public:
   int         getMonth();
   int         getYear();
 
-private:
   int _day;
   int _month;
   int _year;

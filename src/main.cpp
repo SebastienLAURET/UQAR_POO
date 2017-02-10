@@ -1,12 +1,8 @@
-#include <curses.h>
-#include <term.h>
-#include "Menu.hpp"
+#include "MenuPrincipal.hpp"
 
 int main(/*int argc, char const *argv[]*/) {
-  tgetent(NULL, NULL);
-  Menu menu;
-
-  menu();
+  system("clear");
+  MenuPrincipal::run();
 
   return 0;
 }

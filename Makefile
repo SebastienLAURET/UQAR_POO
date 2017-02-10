@@ -1,18 +1,19 @@
-NAME	= bin
+NAME			= bin
 
-FILE	= src/Adresse.cpp \
-	src/Personne.cpp \
-	src/Menu.cpp \
-	src/Date.cpp \
-	src/main.cpp
+FILE			= src/Model/Adresse.cpp \
+					src/Model/Personne.cpp \
+					src/Model/Date.cpp \
+					src/main.cpp \
+					src/Menu/MenuPrincipal.cpp \
+					src/Menu/MenuPersonnes.cpp
 
-OBJ	= $(FILE:.cpp=.o)
+OBJ				= $(FILE:.cpp=.o)
 
-CPPFLAGS	+= -std=c++11 -W -Wall -Wextra -lncurses
+CPPFLAGS	+= -std=c++11 -W -Wall -Wextra -g3 -I src/Menu/ -I src/Model/
 
-GCC	= g++
+GCC				= g++
 
-RM	= rm -f
+RM				= rm -f
 
 all: $(NAME)
 

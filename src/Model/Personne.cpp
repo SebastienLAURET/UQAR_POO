@@ -16,7 +16,7 @@ Personne::~Personne() {
 }
 
 void Personne::init() {
-  putp(tgetstr("cl", NULL));
+  system("clear");
 
   std::string tmp;
   std::string tmpNCivique;

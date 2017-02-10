@@ -60,3 +60,9 @@ int         Date::getMonth() {
 int         Date::getYear() {
   return _year;
 }
+
+bool        Date::operator==(Date &date) {
+  return (date._day == _day
+        && date._month == _month
+        && date._year == _year);
+}

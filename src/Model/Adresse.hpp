@@ -11,7 +11,7 @@ typedef struct  s_adresse {
   char          pays[20];
 }               t_adresse;
 
-class Adresse {
+struct Adresse {
 public:
   Adresse();
   Adresse(t_adresse&);

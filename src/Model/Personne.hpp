@@ -4,9 +4,6 @@
 #include <iostream>
 #include <string>
 
-#include <curses.h>
-#include <term.h>
-
 #include "Date.hpp"
 #include "Adresse.hpp"
 
@@ -19,7 +16,7 @@ typedef struct s_personne {
     int       heureSemaine;
 }              t_personne;
 
-class Personne {
+struct Personne {
 public:
   Personne();
   Personne(t_personne&);
@@ -34,7 +31,7 @@ public:
   double            getSalaire();
   int               getHeureParSemaine();
   void              display();
-private:
+
   std::string _prenom;
   std::string _nom;
   Adresse     _adresse;
