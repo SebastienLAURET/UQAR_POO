@@ -5,7 +5,8 @@ FILE			= src/Model/Adresse.cpp \
 					src/Model/Date.cpp \
 					src/main.cpp \
 					src/Menu/MenuPrincipal.cpp \
-					src/Menu/MenuPersonnes.cpp
+					src/Menu/MenuPersonnes.cpp \
+					src/Menu/input.cpp
 
 OBJ				= $(FILE:.cpp=.o)
 

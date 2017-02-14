@@ -1,4 +1,5 @@
 #include "Personne.hpp"
+#include "input.hpp"
 
 Personne::Personne() {
 
@@ -24,33 +25,17 @@ void Personne::init() {
   std::string tmpVille;
   std::string tmpPays;
 
-  std::cout << "Nom : ";
-  std::getline (std::cin, _nom);
-  std::cout << "prenom : ";
-  std::getline (std::cin, _prenom);
+ _nom = Input::getString("Nom : ");
+ _prenom = Input::getString("Prenom : ");
+ _dateNaissance = Input::getDate("Date de Naissance (jour / mois / année): ");
 
-  std::cout << "Date : ";
-  std::getline (std::cin, tmp);
-  _dateNaissance = Date(tmp);
-
-
-  std::cout << "Numero civique : ";
-  std::getline (std::cin, tmpNCivique);
-  std::cout << "Rue : ";
-  std::getline (std::cin, tmpRue);
-  std::cout << "Ville : ";
-  std::getline (std::cin, tmpVille);
-  std::cout << "Pays : ";
-  std::getline (std::cin, tmpPays);
+ tmpNCivique = Input::getString("Num Civique : ");
+ tmpRue = Input::getString("Rue : ");
+ tmpVille = Input::getString("Ville : ");
+ tmpPays = Input::getString("Pays : ");
   _adresse = Adresse(tmpNCivique, tmpRue, tmpVille, tmpPays);
-
-  std::cout << "Salaire : ";
-  std::getline (std::cin, tmp);
-  _salaire = std::stoi(tmp);
-
-  std::cout << "Heure par semaine : ";
-  std::getline (std::cin, tmp);
-  _heureParSemaine = std::stoi(tmp);
+  _salaire = Input::getInt("Salaire : ");
+  _heureParSemaine = Input::getDouble("heureSemaine : ");
 }
 
 void Personne::toStruct(t_personne &pers) {

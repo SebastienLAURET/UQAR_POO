@@ -1,5 +1,7 @@
 #include "MenuPersonnes.hpp"
 #include "MenuPrincipal.hpp"
+#include "input.hpp"
+
   void MenuPersonnes::searchPersonne(Personnes *listPers) {
     MenuPersonnes::_displayMenuSearch();
     while (search(listPers)) {
@@ -18,27 +20,25 @@
     Personnes *tmpList = NULL;
 
     std::string value;
-    value = MenuPrincipal::getPromptValue(std::string("slection :"));
-
-    switch (std::stoi(value)) {
+    switch (Input::getInt("selection :")) {
       case 1:
-        value = MenuPrincipal::getPromptValue(std::string("Nom"));
+        value = Input::getString("nom : ");
         tmpList = listPers->findByNom(value);
         break;
       case 2:
-        value = MenuPrincipal::getPromptValue(std::string("Prenom"));
+        value = Input::getString("prenom : ");
         tmpList = listPers->findByPrenom(value);
         break;
       case 3:
-        value = MenuPrincipal::getPromptValue(std::string("Date"));
-        tmpList = listPers->findByDate(Date(value));
+
+        tmpList = listPers->findByDate(Input::getDate("date de Naissance : "));
         break;
       default:
         break;
     }
 
     if (tmpList->length() == 0) {
-      value = MenuPrincipal::getPromptValue(std::string("Aucune Personne \n voulez vous encore test (y/n):"));
+      value = Input::getString("Aucune Personne \n voulez vous encore test (y/n):");
       return (value == "y");
     }
 
@@ -50,9 +50,7 @@
     while (true) {
       MenuPersonnes::_displayMenuPersonne(persSelect);
 
-      value = MenuPrincipal::getPromptValue("selection:");
-
-      switch (std::stoi(value)) {
+      switch (Input::getInt("selection : ")) {
         case 1: MenuPersonnes::edit(persSelect); break;
         case 2: MenuPersonnes::deletePers(listPers, persSelect); return false;
         case 3: return true;
@@ -70,8 +68,7 @@
       iter->pers->display();
       iter = iter->next;
     }
-    std::string value = MenuPrincipal::getPromptValue(std::string("slection :"));
-    return listPers->at(std::stoi(value));
+    return listPers->at(Input::getInt("selection"));
   }
 
   void MenuPersonnes::_displayMenuPersonne(Personnes *pers) {
@@ -90,9 +87,6 @@
 
   void MenuPersonnes::deletePers(Personnes *list, Personnes *pers) {
     pers->pers->display();
-    MenuPrincipal::getPromptValue(std::string("erase"));
-    std::cout << "size list select : " << list->length() << std::endl;
-  //  delete pers->pers;
+    delete pers->pers;
     list->remove(pers->pers);
-    std::cout << "size list select : " << list->length() << std::endl;
   }

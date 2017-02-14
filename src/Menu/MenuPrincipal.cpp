@@ -1,26 +1,20 @@
 #include "MenuPrincipal.hpp"
 #include "MenuPersonnes.hpp"
 
-std::string MenuPrincipal::getPromptValue(std::string str) {
-  std::cout << str ;
-  std::string tmp;
-  getline(std::cin, tmp);
-  return tmp;
-}
 void MenuPrincipal::run() {
   Personnes   persList;
   std::string nbTmp;
 
   while (true) {
       _displayMenuPrincipal();
-      getline(std::cin, nbTmp);
-      switch (std::stoi(nbTmp)) {
+      switch (Input::getInt("select :")) {
         case 1: _loadFile(persList);      break;
         case 2: _addPersonne(persList);   break;
         case 3: _printPersonne(persList); break;
         case 4: _savePersonne(persList);  break;
         case 5: MenuPersonnes::searchPersonne(&persList); break;
-        case 6: system("clear");          return;
+        case 6: _printSalaire(persList);   break;
+        case 7: system("clear");          return;
         default:                          break;
       }
   }
@@ -31,9 +25,9 @@ void MenuPrincipal::_displayMenuPrincipal() {
   std::cout << "2 - Add persone" << std::endl;
   std::cout << "3 - Print persone list" << std::endl;
   std::cout << "4 - Save persone list" << std::endl;
-  std::cout << "5 - Edition" << "\n";
-  std::cout << "6 - Exit" << std::endl;
-  std::cout << "select : " << std::flush;
+  std::cout << "5 - Edition" << std::endl;
+  std::cout << "6 - salaire" << std::endl;
+  std::cout << "7 - Exit" << std::endl;
 }
 
 void MenuPrincipal::_loadFile(Personnes &persList) {
@@ -95,4 +89,18 @@ void MenuPrincipal::_savePersonne(Personnes &persList) {
     fs << tmpStr;
   }
   fs.close();
+}
+
+void MenuPrincipal::_printSalaire(Personnes &persList) {
+  Personnes       *listPers = persList.next;
+  double tmpSalaire;
+  while (listPers->pers != NULL) {
+    tmpSalaire = listPers->pers->_salaire * listPers->pers->_heureParSemaine;
+    std::cout << listPers->pers->_prenom << " "
+              << listPers->pers->_nom << " : "
+              << tmpSalaire << std::endl;
+    listPers = listPers->next;
+  }
+  std::string tmp;
+  std::getline (std::cin, tmp);
 }
