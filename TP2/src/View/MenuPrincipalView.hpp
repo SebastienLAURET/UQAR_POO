@@ -73,7 +73,7 @@ public:
     int type;
     std::string nom, prenom;
     Date date;
-    CompteNormal *compteParent;
+    Compte *compteParent;
 
     do {
 
@@ -86,14 +86,30 @@ public:
       prenom = Input::getString("prenom : ");
       date = Input::getDate("date Naissance : ");
 
-      std::cout << (Date() - date).getYear() << '\n';
-      std::cout << Date().getYear() << " " << date.getYear() << '\n';
-
+      std::cout << "date :" << Date().getYear() << " "<<  date.getYear()  << '\n';
       if ((Date() - date).getYear() < 10) {
+
+        bool checkNormalCompte = false;
+
+        std::list<Compte*> list = _compteController.getListCompte();
+        std::cout << "id\t\t:Nom\t\t:Prenom\t\t:Date"<< '\n';
+        for (auto compte : list) {
+          if (compte->getType() == Compte::NORMAL) {
+            std::cout << compte->getId() << "\t\t"
+                      << compte->getNom() << ((compte->getNom().length() >= 9) ? "\t" : "\t\t")
+                      << compte->getPrenom() << ((compte->getPrenom().length() >= 9) ? "\t" : "\t\t")
+                      << compte->getNaissance().toString() << '\n';
+            checkNormalCompte = true;
+          }
+        }
+        if (!checkNormalCompte) {
+          return;
+        }
         std::cout << "Ce compte doit avoir un compte rataché" << '\n';
         do {
           idParent = Input::getInt("id du compte parent:");
-        } while(compteParent = reinterpret_cast<CompteNormal*>(_compteController.findCompteById(idParent)));
+          compteParent = _compteController.findCompteById(idParent);
+        } while(!(compteParent && compteParent->getType() == Compte::NORMAL));
       }
     } while(Input::getString("tout est correct? (y/n)") != "y");
 
@@ -102,7 +118,7 @@ public:
     } else if (type == 2 && idParent == 0) {
       _compteController.addCompte(new CompteNormal(id, nom, prenom, date));
     } else if (type == 2 && idParent != 0){
-      _compteController.addCompte(new CompteEnfant(id, nom, prenom, date, *compteParent));
+      _compteController.addCompte(new CompteEnfant(id, nom, prenom, date, *reinterpret_cast<CompteNormal*>(compteParent)));
     }
   }
 

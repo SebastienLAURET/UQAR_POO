@@ -19,20 +19,17 @@ bool Input::is_Date(const std::string &s) {
   v = FactoryCSV::split(s, '-');
   if (v.size() != 3)
     return false;
-    std::cout << "jour" << '\n';
-  if (!(is_integer(v[0])
-      && std::stoi(v[0]) > 0
-      && std::stoi(v[0]) <= 31))
+  if (!(is_integer(v[2])
+      && std::stoi(v[2]) > 0
+      && std::stoi(v[2]) <= 31))
     return false;
-    std::cout << "moi" << '\n';
   if (!(is_integer(v[1])
       && std::stoi(v[1]) > 0
       && std::stoi(v[1]) <= 12))
     return false;
-    std::cout << "année" << v[2] << '\n';
-  if (!(is_integer(v[2])
-      && std::stoi(v[2]) > 1900
-      && std::stoi(v[2]) <= Date().getYear()))
+  if (!(is_integer(v[0])
+      && std::stoi(v[0]) > 1900
+      && std::stoi(v[0]) <= Date().getYear()))
     return false;
 
   return true;

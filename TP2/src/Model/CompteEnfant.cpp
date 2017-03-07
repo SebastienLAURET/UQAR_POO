@@ -22,7 +22,10 @@ bool CompteEnfant::makeTransaction(Transaction const &transaction) {
 }
 
 bool CompteEnfant::isGoodTransaction(Transaction const &transaction) {
-  if (transaction.getMontant() > 10)
+  std::cout << "montant" << transaction.getMontant() << '\n';
+  if (transaction.getMontant() > 0)
+    return true;
+  if (transaction.getMontant() < -10)
     return false;
 
   float montant = 0;

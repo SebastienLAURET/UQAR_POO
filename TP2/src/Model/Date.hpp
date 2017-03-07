@@ -30,20 +30,20 @@ public:
 
     if ((end = date.find("-", begin)) != std::string::npos) {
       str = date.substr(begin, end - begin);
-      std::cout << "year : "<< str << std::endl;
+      //std::cout << "year : "<< str << std::endl;
       _year = std::stoi(str);
       begin = end + 1;
     }
     if ((end = date.find("-", begin)) != std::string::npos) {
       str = date.substr(begin, end - begin);
-      std::cout << "month : "<< str << std::endl;
+      //std::cout << "month : "<< str << std::endl;
       _month = std::stoi(str);
       begin = end + 1;
       str = date.substr(begin, date.size());
-      std::cout << "day : "<< str << std::endl;
+    //  std::cout << "day : "<< str << std::endl;
       _day = std::stoi(str);
     }
-    std::cout << _day << "/" << _month << "/" << _year << std::endl;
+  //  std::cout << _day << "/" << _month << "/" << _year << std::endl;
 
   }
 

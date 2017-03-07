@@ -46,7 +46,7 @@ std::string Compte::toCsv(int idParent) {
     idP << idParent;
 
   str << _id << ","
-      << _type << ","
+      << (char)_type << ","
       << _nom << ","
       << _prenom << ","
       << _naissance.toString() << ","

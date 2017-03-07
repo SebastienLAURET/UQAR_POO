@@ -26,7 +26,7 @@ public:
       std::vector<std::string> listArg;
 
       while (std::getline(file, line)) {
-        std::cout << line << '\n';
+      std::cout << line << '\n';
         listArg = FactoryCSV::split(line, ',');
 
         switch (listArg[1].at(0)) {
@@ -44,12 +44,21 @@ public:
             break;
         }
       }
-      file.close();
     }
+    file.close();
   }
 
   void save() const {
+    std::ofstream fs;
 
+    fs.open(_filePath, std::ofstream::trunc);
+    if (fs.is_open()) {
+      for (auto compte : _list) {
+        fs << compte->toString()<< '\n';
+        delete compte;
+      }
+    }
+    fs.close();
   }
 
   std::list<Compte*> &getList(){
