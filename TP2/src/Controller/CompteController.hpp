@@ -64,13 +64,14 @@ public:
 
   void supprimerCompte(Compte *compte) {
     _listCompte.remove(compte);
-    switch (compte->getType()) {
+    delete compte;
+/*    switch (compte->getType()) {
       case Compte::NORMAL: delete reinterpret_cast<CompteNormal*>(compte); break;
       case Compte::ENFANT: delete reinterpret_cast<CompteEnfant*>(compte); break;
       case Compte::EPARGNE: delete reinterpret_cast<CompteEpargne*>(compte); break;
       default: break;
-    }
-    delete compte;
+    }*/
+//    delete compte;
   }
 private:
   std::list<Compte*> &_listCompte;

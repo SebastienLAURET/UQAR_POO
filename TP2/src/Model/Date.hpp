@@ -14,30 +14,37 @@ public:
     _day = timeinfo->tm_mday;
     _month = timeinfo->tm_mon;
     _year = timeinfo->tm_year + 1900;
-    std::cout << _day << "/" << _month << "/" << _year << std::endl;
+  //  std::cout << _day << "/" << _month << "/" << _year << std::endl;
   }
 
   Date(Date const &date)
   : _day(date.getDay()), _month(date.getMonth()), _year(date.getYear()) {
+  //  std::cout << _day << "/" << _month << "/" << _year << std::endl;
 
   }
 
-  Date(std::string &date) {
+  Date(std::string &date)
+  : _day(-1), _month(-1), _year(-1) {
     std::string str;
     std::size_t begin = 0, end = 0;
 
     if ((end = date.find("-", begin)) != std::string::npos) {
       str = date.substr(begin, end - begin);
+      std::cout << "year : "<< str << std::endl;
       _year = std::stoi(str);
       begin = end + 1;
     }
     if ((end = date.find("-", begin)) != std::string::npos) {
       str = date.substr(begin, end - begin);
+      std::cout << "month : "<< str << std::endl;
       _month = std::stoi(str);
       begin = end + 1;
       str = date.substr(begin, date.size());
+      std::cout << "day : "<< str << std::endl;
       _day = std::stoi(str);
     }
+    std::cout << _day << "/" << _month << "/" << _year << std::endl;
+
   }
 
   Date(int day, int month, int year)

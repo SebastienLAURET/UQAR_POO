@@ -19,6 +19,7 @@ public:
     std::string const &nom, std::string const &prenom,
     Date naissance);
 
+    virtual ~Compte() {};
   // GETTER
 
   int                                 getId() const;

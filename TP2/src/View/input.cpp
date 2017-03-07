@@ -3,10 +3,12 @@
 bool Input::is_integer(const std::string & s){
   size_t i = 0;
 
+  if (s.length() == 0)
+    return false;
   if (s.at(i) == '-')
     ++i;
   for (; i < s.length(); i++) {
-    if (s.at(i) < '0' && s.at(i) > '9' && s.at(i) == '.')
+    if ((s.at(i) < '0' || s.at(i) > '9') && s.at(i) != '.')
       return false;
   }
   return true;
@@ -14,20 +16,23 @@ bool Input::is_integer(const std::string & s){
 bool Input::is_Date(const std::string &s) {
   std::vector<std::string> v;
 
-  v = FactoryCSV::split(s, '/');
+  v = FactoryCSV::split(s, '-');
   if (v.size() != 3)
     return false;
-  if (!is_integer(v[0])
+    std::cout << "jour" << '\n';
+  if (!(is_integer(v[0])
       && std::stoi(v[0]) > 0
-      && std::stoi(v[0]) <= 31)
+      && std::stoi(v[0]) <= 31))
     return false;
-  if (!is_integer(v[1])
-      && std::stoi(v[0]) > 0
-      && std::stoi(v[0]) <= 12)
+    std::cout << "moi" << '\n';
+  if (!(is_integer(v[1])
+      && std::stoi(v[1]) > 0
+      && std::stoi(v[1]) <= 12))
     return false;
-  if (!is_integer(v[2])
-      && std::stoi(v[0]) > 1900
-      && std::stoi(v[0]) <= 2017)
+    std::cout << "année" << v[2] << '\n';
+  if (!(is_integer(v[2])
+      && std::stoi(v[2]) > 1900
+      && std::stoi(v[2]) <= Date().getYear()))
     return false;
 
   return true;
@@ -62,9 +67,11 @@ int Input::getInt(const std::string str) {
 
 Date Input::getDate(const std::string str) {
   std::string tmp;
+  Date  tmpDate;
   while (tmp == "") {
     tmp = Input::getString(str);
-    if (Input::is_Date(tmp)){
+    if (Input::is_Date(tmp)
+        && (tmpDate = Date(tmp)).getMonth() > 0){
       return Date(tmp);
     } else {
       tmp.clear();

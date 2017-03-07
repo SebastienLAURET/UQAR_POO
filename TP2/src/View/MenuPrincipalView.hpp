@@ -25,11 +25,12 @@ public:
         << "----------MENU-----------" << "\n"
         << "-------------------------" << "\n"
         << "- 1/ list des Comptes   -" << "\n"
-        << "- 2/ Ajouter un compte  -" << "\n"
-        << "- 3/ supprimer un compte-" << "\n"
-        << "- 4/ faire un Retrai    -" << "\n"
-        << "- 5/ Ajouter de l'argent-" << "\n"
-        << "- 6/ Quitter            -" << "\n"
+        << "- 2/ Detail du compte.  -" << "\n"
+        << "- 3/ Ajouter un compte  -" << "\n"
+        << "- 4/ supprimer un compte-" << "\n"
+        << "- 5/ faire un Retrai    -" << "\n"
+        << "- 6/ Ajouter de l'argent-" << "\n"
+        << "- 0/ Quitter            -" << "\n"
         << "-------------------------" << "\n"
         << "selection : " ;
     return Input::getInt(str.str());
@@ -37,19 +38,33 @@ public:
 
   void displayListCompte() {
     std::list<Compte*> list = _compteController.getListCompte();
-
+    std::cout << "id\t\t:Nom\t\t:Prenom\t\t:Date"<< '\n';
     for (auto compte : list) {
-      std::cout << "id\t\t:" << compte->getId() << '\n'
-                << "Nom\t:" << compte->getNom() << '\n'
-                << "Prenom\t:" << compte->getPrenom() << '\n'
-                << "Date\t:" << compte->getNaissance().toString() << '\n'
-                << "Sold\t:" << compte->getSold() << '\n'
-                << "TRANSACTION :: " << '\n';
-      for (auto transac : compte->getListTransaction()) {
-        std::cout << transac.getDate().toString()
-                  << " -- " << transac.getMontant() << '\n';
-      }
+      std::cout << compte->getId() << "\t\t"
+                << compte->getNom() << ((compte->getNom().length() >= 9) ? "\t" : "\t\t")
+                << compte->getPrenom() << ((compte->getPrenom().length() >= 9) ? "\t" : "\t\t")
+                << compte->getNaissance().toString() << '\n';
     }
+    std::string str;
+    std::getline(std::cin, str);
+  }
+  void displayCompte() {
+    if (_compteController.getListCompte().size() == 0)
+      return;
+    Compte* compte = getCompte();
+
+    std::cout << "id\t:" << compte->getId() << '\n'
+              << "Nom\t:" << compte->getNom() << '\n'
+              << "Prenom\t:" << compte->getPrenom() << '\n'
+              << "Date\t:" << compte->getNaissance().toString() << '\n'
+              << "Sold\t:" << compte->getSold() << '\n'
+              << "TRANSACTION :: " << '\n';
+    for (auto transac : compte->getListTransaction()) {
+      std::cout << transac.getDate().toString()
+                << " -- " << transac.getMontant() << '\n';
+    }
+    std::string str;
+    std::getline(std::cin, str);
   }
 
   void ajouterCompte() {
@@ -61,14 +76,19 @@ public:
     CompteNormal *compteParent;
 
     do {
+
       do {
         system("clear");
         type = Input::getInt("Créer un compte :\n1/Epargne\n2/normal\nselection:");
       } while (type != 1 && type != 2);
+
       nom = Input::getString("nom : ");
       prenom = Input::getString("prenom : ");
       date = Input::getDate("date Naissance : ");
+
       std::cout << (Date() - date).getYear() << '\n';
+      std::cout << Date().getYear() << " " << date.getYear() << '\n';
+
       if ((Date() - date).getYear() < 10) {
         std::cout << "Ce compte doit avoir un compte rataché" << '\n';
         do {
@@ -76,6 +96,7 @@ public:
         } while(compteParent = reinterpret_cast<CompteNormal*>(_compteController.findCompteById(idParent)));
       }
     } while(Input::getString("tout est correct? (y/n)") != "y");
+
     if (type == 1) {
       _compteController.addCompte(new CompteEpargne(id, nom, prenom, date));
     } else if (type == 2 && idParent == 0) {
@@ -95,33 +116,39 @@ public:
   }
 
   void supprimerCompte() {
+    if (_compteController.getListCompte().size() == 0)
+      return;
     Compte *compte = getCompte();
     _compteController.supprimerCompte(compte);
   }
 
   void faireRetrait() {
+    if (_compteController.getListCompte().size() == 0)
+      return;
     Compte *compte = getCompte();
     double montant;
 
     do {
       montant = Input::getDouble("Montant du retrait :");
-    } while(montant > 0);
+    } while(montant <= 0);
     Transaction transaction(-montant);
-    if (compte->makeTransaction(transaction)) {
+    if (!compte->makeTransaction(transaction)) {
       std::cout << "Transacion refuser" << std::endl;
       std::string tmp;
       std::getline(std::cin, tmp);
     }
   }
   void ajouterDeLArgent(){
+    if (_compteController.getListCompte().size() == 0)
+      return;
     Compte *compte = getCompte();
     double montant;
 
     do {
       montant = Input::getDouble("Montant du versement :");
-    } while(montant > 0);
+    } while(montant <= 0);
     Transaction transaction(montant);
-    if (compte->makeTransaction(transaction)) {
+    if (!compte->makeTransaction(transaction)) {
       std::cout << "Transacion refuser" << std::endl;
       std::string tmp;
       std::getline(std::cin, tmp);
