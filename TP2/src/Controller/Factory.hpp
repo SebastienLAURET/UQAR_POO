@@ -56,7 +56,7 @@ public:
     return _list;
   }
 
-  static FactoryCSV &getFactory(std::string path = std::string("./save/banque.csv")) {
+  static FactoryCSV &getFactory(std::string const path = std::string("./save/banque.csv")) {
     static FactoryCSV *factory = nullptr;
 
     if (!factory) {
@@ -65,7 +65,7 @@ public:
     return *factory;
   }
 
-  static std::vector<std::string> split(std::string &str, char car) {
+  static std::vector<std::string> split(std::string const &str, char car) {
     std::vector<std::string> list;
     size_t pos, posPrev = 0;
 
@@ -73,6 +73,7 @@ public:
       list.push_back(str.substr(posPrev, pos - posPrev));
       posPrev = pos + 1;
     }
+    list.push_back(str.substr(posPrev, str.length()));
     return list;
   }
 

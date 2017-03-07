@@ -4,11 +4,12 @@ FILE			= src/Model/CompteEnfant.cpp \
 					src/Model/CompteEpargne.cpp \
 					src/Model/CompteNormal.cpp \
 					src/Model/Compte.cpp \
+					src/View/input.cpp \
 					src/main.cpp
 
 OBJ				= $(FILE:.cpp=.o)
 
-CPPFLAGS	+= -std=c++11 -W -Wall -Wextra -g3 -I src/Controller/ -I src/Model/
+CPPFLAGS	+= -std=c++11 -W -Wall -Wextra -g3 -I src/Controller/ -I src/Model/ -I src/View/
 
 GCC				= g++
 

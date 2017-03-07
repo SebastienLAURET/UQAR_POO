@@ -1,18 +1,19 @@
 #ifndef INPUT_HPP
 # define INPUT_HPP
 
+#include <vector>
 #include <iostream>
-#include <regex>
 #include <cstring>
 #include "Date.hpp"
+#include "Factory.hpp"
 
 namespace Input {
   bool is_integer(const std::string & s);
   bool is_Date(const std::string &s);
-  double getDouble(std::string str);
-  int getInt(std::string str);
-  Date getDate(std::string str);
-  std::string getString(std::string str);
+  double getDouble(const std::string str);
+  int getInt(const std::string str);
+  Date getDate(const std::string str);
+  std::string getString(const std::string str);
 };
 
 #endif

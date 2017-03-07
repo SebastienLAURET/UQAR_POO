@@ -1,14 +1,22 @@
-#include "Factory.hpp"
+#include "CompteController.hpp"
+#include "MenuPrincipalView.hpp"
 
-int main(int argc, char const *argv[]) {
-  FactoryCSV &toto = FactoryCSV::getFactory();
-  std::list<Compte*> &list = toto.getList();
+int main() {
+  CompteController compteContoller;
+  MenuView menu(compteContoller);
+  int selection;
 
-  std::string str;
-  for (auto elem : list) {
-    str = elem->toString();
-    std::cout << str << '\n';
+  while (selection = menu.displayMenu()) {
+    switch (selection) {
+      case 1: menu.displayListCompte(); break;
+      case 2: menu.ajouterCompte(); break;
+      case 3: menu.supprimerCompte(); break;
+      case 4: menu.faireRetrait(); break;
+      case 5: menu.ajouterDeLArgent(); break;
+      default: break;
+    }
   }
+
 
   return 0;
 }

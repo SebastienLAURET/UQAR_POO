@@ -1,13 +1,39 @@
 #include "input.hpp"
 
 bool Input::is_integer(const std::string & s){
-    return std::regex_match(s, std::regex("[0-9]+"));
+  size_t i = 0;
+
+  if (s.at(i) == '-')
+    ++i;
+  for (; i < s.length(); i++) {
+    if (s.at(i) < '0' && s.at(i) > '9' && s.at(i) == '.')
+      return false;
+  }
+  return true;
 }
 bool Input::is_Date(const std::string &s) {
-    return std::regex_match(s, std::regex("[0-9]+[/][0-9]+[/][0-9]+"));
+  std::vector<std::string> v;
+
+  v = FactoryCSV::split(s, '/');
+  if (v.size() != 3)
+    return false;
+  if (!is_integer(v[0])
+      && std::stoi(v[0]) > 0
+      && std::stoi(v[0]) <= 31)
+    return false;
+  if (!is_integer(v[1])
+      && std::stoi(v[0]) > 0
+      && std::stoi(v[0]) <= 12)
+    return false;
+  if (!is_integer(v[2])
+      && std::stoi(v[0]) > 1900
+      && std::stoi(v[0]) <= 2017)
+    return false;
+
+  return true;
 }
 
-double Input::getDouble(std::string str) {
+double Input::getDouble(const std::string str) {
   std::string tmp;
   while (tmp == "") {
     tmp = Input::getString(str);
@@ -20,9 +46,8 @@ double Input::getDouble(std::string str) {
   return -1;
 }
 
-int Input::getInt(std::string str) {
+int Input::getInt(const std::string str) {
   std::string tmp;
-  std::cout << "getint" << std::endl;
 
   while (tmp == "") {
     tmp = Input::getString(str);
@@ -35,7 +60,7 @@ int Input::getInt(std::string str) {
   return -1;
 }
 
-Date Input::getDate(std::string str) {
+Date Input::getDate(const std::string str) {
   std::string tmp;
   while (tmp == "") {
     tmp = Input::getString(str);
@@ -48,7 +73,8 @@ Date Input::getDate(std::string str) {
   std::string dateErr = "-1/-1/-1";
   return Date(dateErr);
 }
-std::string Input::getString(std::string str) {
+
+std::string Input::getString(const std::string str) {
   std::cout << str ;
   std::string tmp;
   while (tmp == "") {

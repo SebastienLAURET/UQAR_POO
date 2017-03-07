@@ -56,14 +56,16 @@ std::string Compte::toCsv(int idParent) {
     str << "," << transac.getDate().toString()
         << "," << transac.getMontant();
   }
-  str << std::endl;
   return str.str();
 }
 
 void  Compte::setTransaction(std::vector<std::string> &v) {
-std::cout << "size : " << v.size() << std::endl;
-  for (size_t i = 6; i < v.size(); i += 2) {
-    Transaction tran(v[i + 1], v[i]);
-    addTransaction(tran);
+  std::cout << "size : " << v.size() << std::endl;
+
+  std::cout << v[6] << '\n';
+  _sold = std::stof(v[6]);
+  for (size_t i = 7; i < v.size(); i += 2) {
+    Transaction tran(v[i], v[i+1]);
+    _listTransaction.push_back(tran);
   }
 }
