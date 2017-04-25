@@ -64,8 +64,8 @@ private:
   }
 
 
-  std::string _refLetterConsonne = "bcdfghjklmnpqrstvwxz";
-  std::string _refLetterVoyelle = "aeiouy";
+  const std::string _refLetterConsonne = "bcdfghjklmnpqrstvwxz";
+  const std::string _refLetterVoyelle = "aeiouy";
 
   std::string _letterString;
 };
