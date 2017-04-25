@@ -16,19 +16,16 @@ public:
 
   }
 
-  std::string const & genLettreString() {
-    char tmpCar;
 
-    _letterString.clear();
-    for (size_t iter = 0; iter < 10; iter++) {
-        tmpCar = genLetter();
-        _letterString.append(&tmpCar, 1);
-    }
-    return _letterString;
-  }
 
   std::string const & getLetterString() const {
     return _letterString;
+  }
+  std::string const getNewWord() {
+    if (askGenMode())
+      return genLettreString();
+    else
+      return getPromptLetterString();
   }
 
   int tryWord(std::string const &str) const {
@@ -56,6 +53,36 @@ public:
   }
 
 private:
+  bool  askGenMode() {
+    std::string word;
+    do {
+      std::cout << "Voulez vous generer aleatoirement le mot ? (y/n)"<< '\n';
+      std::getline (std::cin, word);
+    } while (word != "y" && word != "n");
+    return (word == "y");
+  }
+
+  std::string const getPromptLetterString() {
+    std::string word;
+    do {
+      std::cout << "Faite une proposition de 10 lettres"<< '\n';
+      std::getline (std::cin, word);
+    } while (word.size() != 10);
+    _letterString = word;
+    return word;
+  }
+
+  std::string const & genLettreString() {
+    char tmpCar;
+
+    _letterString.clear();
+    for (size_t iter = 0; iter < 10; iter++) {
+        tmpCar = genLetter();
+        _letterString.append(&tmpCar, 1);
+    }
+    return _letterString;
+  }
+
   char genLetter() const {
     if (rand()%10 <= 4)
       return (_refLetterConsonne.at(rand() % _refLetterConsonne.size()));

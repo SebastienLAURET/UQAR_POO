@@ -25,21 +25,39 @@ public:
   }
 
   std::string searchWord(std::string const &word) {
-    std::list<std::string> listGoodWord;
 
-    for (auto it : _dictionaire){
+    searchLongWord(word);
+    return searchScoreWord(word);
+  }
+
+  std::string searchLongWord(std::string const &word) {
+    int i = 0;
+
+    for (auto it : _dictionaireMotLong){
+      ++i;
       if (Arbitre::tryWordStatic(word, it) != -1) {
-        listGoodWord.push_back(it);
+        std::cout << "------------------" << std::endl;
+        std::cout << "nb mots analysé :"<< i << std::endl;
+        std::cout << "mot +  : long ["<< it <<"]" << std::endl;
+        std::cout << "------------------" << std::endl;
+        return it;
       }
     }
-    if (listGoodWord.size()) {
-      std::cout << "------------------" << std::endl;
-      std::cout << "nb mots trouvé:"<< listGoodWord.size() << std::endl;
-      std::cout << "mot + long : ["<< listGoodWord.front() <<"]" << std::endl;
-      listGoodWord.sort(comparePointString);
-      std::cout << "mot + point : ["<< listGoodWord.front() <<"]" << std::endl;
-      std::cout << "------------------" << std::endl;
-      return listGoodWord.front();
+    return "";
+  }
+
+  std::string searchScoreWord(std::string const &word) {
+    int i = 0;
+
+    for (auto it : _dictionaireMotPoint){
+      ++i;
+      if (Arbitre::tryWordStatic(word, it) != -1) {
+        std::cout << "------------------" << std::endl;
+        std::cout << "nb mots analysé :"<< i << std::endl;
+        std::cout << "mot + de points : ["<< it <<"]" << std::endl;
+        std::cout << "------------------" << std::endl;
+        return it;
+      }
     }
     return "";
   }
@@ -50,13 +68,17 @@ private:
     std::string str;
 
     while (std::getline(file, str)) {
-      _dictionaire.push_front(str);
+      _dictionaireMotLong.push_front(str);
+      _dictionaireMotPoint.push_front(str);
     }
-    _dictionaire.sort(Robot::compareSizeString);
+    _dictionaireMotLong.sort(Robot::compareSizeString);
+    _dictionaireMotPoint.sort(Robot::comparePointString);
   }
 
 
-  std::list<std::string> _dictionaire;
+  std::list<std::string> _dictionaireMotLong;
+  std::list<std::string> _dictionaireMotPoint;
+
 };
 
 

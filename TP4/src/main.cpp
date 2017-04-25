@@ -10,7 +10,7 @@ int main(int, char const **) {
 
   while (1) {
     system("clear");
-    letterTest = arb.genLettreString();
+    letterTest = arb.getNewWord();
     std::cout << "Les lettres disponible sont :" << letterTest << std::endl;
 
     nbTest  = 1;
